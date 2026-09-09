@@ -1,0 +1,23 @@
+Junior Data Analyst
+
+We are hiring a Junior Data Analyst to join our analytics team and help drive data-informed business decisions. You will work with stakeholders across product, marketing, and operations to extract, analyze, and visualize data from multiple internal systems.
+
+Responsibilities:
+- Pull, clean, and analyze data from SQL databases and BI tools.
+- Build dashboards and reports using Power BI / Tableau.
+- Identify trends, KPIs, and actionable business insights.
+- Collaborate with stakeholders to define analytics requirements.
+- Automate repetitive reporting tasks using Python / Excel.
+
+Required skills:
+- 1+ year of hands-on experience in data analysis or a similar role.
+- Strong SQL skills (joins, CTEs, window functions) with PostgreSQL or MySQL.
+- Proficient with Excel (pivot tables, Power Query) and Power BI or Tableau.
+- Python basics (Pandas, NumPy) for data manipulation.
+- Good communication and presentation skills.
+- Bachelor's degree in Statistics, Math, Economics, CS, or related field.
+
+Nice-to-have:
+- Experience with dbt, Airflow, Snowflake, or BigQuery.
+- Exposure to A/B testing and statistical modeling.
+- Knowledge of cloud data warehouses (AWS Redshift, GCP BigQuery).

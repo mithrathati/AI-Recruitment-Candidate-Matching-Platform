@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+build/
+dist/
+*.egg-info/
+
+# App specific
+uploads/
+*.db
+*.sqlite3
+recruitment.db
+test_recruitment.db
+
+# Env & IDE
+.env
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# sentence-transformers cache (keep if desired, ignore by default)
+.cache/
+~/.cache/

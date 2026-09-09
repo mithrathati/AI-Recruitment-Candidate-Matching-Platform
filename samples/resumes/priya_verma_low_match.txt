@@ -1,0 +1,22 @@
+Priya Verma
+Email: priya.v@example.com
+Phone: +91-90000-11111
+
+OBJECTIVE
+Seeking a backend role where I can grow my Python skills.
+
+EXPERIENCE
+IT Support Executive | SupportCo | 2023 – Present
+- Answered support tickets, reset passwords, and did basic troubleshooting on Windows machines.
+- Used Microsoft Excel to maintain ticket logs and monthly reports.
+- Wrote small Python automation scripts to bulk-create email accounts (using smtplib and csv).
+
+Intern | SmallAgency | 2022 (3 months)
+- Built a small internal Flask web app to list client projects with CRUD operations backed by SQLite.
+- Wrote basic SQL queries to fetch client data from a legacy MySQL database.
+
+EDUCATION
+B.Com — University of Mumbai (2019 – 2022)
+
+SKILLS
+Python basics, Flask, SQL (basic SELECT / JOIN), MS Excel, Word, PowerPoint, basic Linux command line.

@@ -1,0 +1,47 @@
+Aarav Sharma
+Email: aarav.sharma@example.com
+Phone: +91-98765-43210
+Location: Bengaluru, India
+
+SUMMARY
+Senior Backend Engineer with 6+ years of experience designing and building scalable backend systems for SaaS products. Expert in Python, FastAPI, PostgreSQL, and AWS. Passionate about clean architecture, DevOps, and reliability.
+
+EXPERIENCE
+
+Senior Backend Engineer | TechCorp | 2019 – Present
+- Lead a 4-person backend team building a B2B SaaS platform used by 50k+ daily users.
+- Designed and implemented 15+ microservices using Python, FastAPI, and Django, deployed as Docker containers on AWS ECS with RDS PostgreSQL.
+- Built an event-driven order processing pipeline using Kafka and Redis caching, reducing p95 API latency by 40% and eliminating periodic outages under peak load.
+- Implemented CI/CD pipelines using GitHub Actions and Jenkins, cutting release time from 6 hours to 30 minutes with automated Pytest suites and blue/green deployments.
+- Mentored 3 junior engineers, ran weekly architecture reviews, and owned the platform's on-call rotation.
+
+Software Engineer | StartupXYZ | 2017 – 2019
+- Delivered customer-facing REST APIs using Python, Flask, and PostgreSQL.
+- Migrated legacy monolith endpoints to stateless services behind an API gateway, improving throughput by 3x.
+- Implemented JWT authentication and role-based access controls across internal admin tooling.
+
+EDUCATION
+B.Tech in Computer Science — IIT Delhi (2013 – 2017)
+
+SKILLS
+Languages: Python, TypeScript, Bash, SQL
+Frameworks: FastAPI, Django, Flask, Starlette, Pydantic
+Databases: PostgreSQL, MySQL, Redis, Elasticsearch
+Cloud / DevOps: AWS (ECS, RDS, S3, Lambda, CloudWatch, IAM), Docker, Kubernetes (basics), Terraform (learning)
+Messaging / Streaming: Kafka, Redis Pub/Sub
+Tools: Git, GitHub Actions, Jenkins, Pytest, Prometheus, Grafana, Linux
+Methodologies: Agile, Scrum, TDD, Microservices, REST API design
+
+PROJECTS
+1) Order Management Microservice
+   - Tech: Python, FastAPI, PostgreSQL, Redis, Kafka, Docker, AWS ECS
+   - Built an idempotent order processing service handling 20k+ orders/day with saga-based distributed transactions.
+   - Added Redis caching for hot product inventory lookups, reducing DB load by 55%.
+
+2) Unified Auth Service
+   - Tech: Python, FastAPI, PostgreSQL, JWT, AWS Cognito, Docker
+   - Centralized authentication and authorization for 8 services, cutting duplicate auth code by ~70%.
+
+CERTIFICATIONS
+- AWS Certified Solutions Architect – Associate (2023)
+- Certified Kubernetes Application Developer (CKAD) – 2024

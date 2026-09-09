@@ -1,0 +1,31 @@
+Ananya Kapoor
+Email: ananya.k@example.com
+Phone: +91-88888-77777
+
+SUMMARY
+Detail-oriented Junior Data Analyst with 1.5 years of experience turning raw data into business insights. Strong SQL + Power BI skills and a growing Python (Pandas) toolkit.
+
+EXPERIENCE
+
+Data Analyst | RetailCo | 2024 – Present
+- Own weekly sales and inventory dashboards for 12 category managers using Power BI.
+- Write complex SQL (CTEs, window functions) against PostgreSQL data warehouse; optimize slow queries (average 4x speedup for 6 key reports).
+- Clean and combine 8+ data sources using Python (Pandas, NumPy) for quarterly business reviews.
+- Partner with marketing to run cohort analysis and campaign ROI tracking.
+
+Analytics Intern | FinStartup | 2023 (6 months)
+- Built customer retention dashboards in Tableau on top of Redshift.
+- Ran A/B test analysis on new sign-up flows; recommended changes that lifted conversion by 7%.
+
+EDUCATION
+B.Sc Statistics — St. Xavier's College, Mumbai (2019 – 2022)
+  CGPA: 8.7 / 10.
+
+CERTIFICATIONS
+- Google Data Analytics Professional Certificate
+- Microsoft Certified: Power BI Data Analyst Associate (PL-300)
+
+SKILLS
+SQL (PostgreSQL, MySQL, Redshift), Power BI, Tableau, Python (Pandas, NumPy, Matplotlib),
+Advanced Excel, Cohort Analysis, A/B testing basics, dbt basics (learning),
+Strong communication, stakeholder management.

@@ -1,0 +1,28 @@
+Rohan Mehta
+Email: rohan.m@example.com
+Phone: +91-98111-22333
+
+PROFESSIONAL SUMMARY
+Backend specialist with 5.5+ years building and running production systems at scale. Strong focus on API design, data modeling, and cloud-native deployments.
+
+WORK EXPERIENCE
+
+Backend Engineer | XYZ Systems | 2020 – Present
+- Design and maintain production HTTP APIs in Python using ASGI frameworks (FastAPI / Starlette) for a fintech platform serving 30k DAU.
+- Built persistent data models on relational databases (Postgres under the hood, previously MySQL on older services) with careful indexing, partitioning, and read replica usage.
+- Containerized every service with Docker and deployed workloads on Amazon public cloud (EC2 + auto-scaling groups, ALBs, RDS instances, S3 for static assets, IAM policies for least-privilege access).
+- Owned rollout of in-memory caching layer using Redis to offload read traffic; cache hit ratio ~90% for top endpoints.
+- Implemented pub/sub event pipelines to decouple services — similar patterns to Kafka.
+- Familiar with container orchestration platforms (used Kubernetes-style deployments through our internal PaaS).
+
+Junior Developer | SmallCo | 2019 – 2020
+- Built Django web endpoints and maintained MySQL DB schemas.
+- Wrote UNIX shell scripts and Git-based release workflows.
+
+EDUCATION
+Bachelor of Technology, Computer Science — Mumbai IIT (2015 – 2019)
+
+TECHNICAL SKILLS
+Python programming (intermediate-advanced), API Development, Postgres / MySQL, Docker,
+AWS cloud (EC2, S3, RDS), container orchestration, Redis caching, Linux administration, Git,
+Agile / Jira, Pytest basics.
