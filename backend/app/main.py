@@ -36,10 +36,10 @@ app.add_middleware(
 
 register_error_handlers(app)
 
-app.include_router(health.router)
-app.include_router(jobs.router)
-app.include_router(resumes.router)
-app.include_router(matching.router)
+app.include_router(health.router, prefix="/api")
+app.include_router(jobs.router, prefix="/api")
+app.include_router(resumes.router, prefix="/api")
+app.include_router(matching.router, prefix="/api")
 
 
 @app.get("/", include_in_schema=False)
@@ -48,7 +48,7 @@ def root():
         "name": settings.APP_NAME,
         "version": settings.APP_VERSION,
         "docs": "/docs",
-        "health": "/health",
+        "health": "/api/health",
     }
 
 
