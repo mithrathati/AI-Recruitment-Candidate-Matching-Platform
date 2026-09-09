@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     OPENAI_TEMPERATURE: float = 0.1
     OPENAI_MAX_TOKENS: int = 2000
 
-    USE_LOCAL_EMBEDDINGS: bool = True
+    USE_LOCAL_EMBEDDINGS: bool = False
     LOCAL_EMBEDDING_MODEL: str = "all-MiniLM-L6-v2"
 
     UPLOAD_DIR: str = "./uploads"
