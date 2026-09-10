@@ -92,13 +92,26 @@ export function UploadResumes(): JSX.Element {
     return accept;
   }, [info]);
 
-  const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } =
+  const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections, open } =
     useDropzone({
       onDrop,
       accept: Object.keys(acceptObj).length ? acceptObj : undefined,
       maxSize: (info?.max_upload_mb ?? 15) * 1024 * 1024,
-      noClick: false,
+      noClick: true,
     });
+
+  const handleZoneClick = useCallback(
+    (e?: React.MouseEvent | Event): void => {
+      e?.stopPropagation?.();
+      e?.preventDefault?.();
+      if (inputRef.current) {
+        inputRef.current.click();
+      } else {
+        open();
+      }
+    },
+    [open],
+  );
 
   useEffect(() => {
     if (fileRejections.length > 0) {
@@ -259,7 +272,7 @@ export function UploadResumes(): JSX.Element {
         <div className="lg:col-span-2 space-y-4">
           <HudCard cornerBrackets glow="magenta" title="Dropzone" subtitle="Drag and drop resume files or click to browse">
             <div
-              {...getRootProps()}
+              {...getRootProps({ onClick: handleZoneClick })}
               className={cn(
                 "cursor-pointer rounded-xl border-2 border-dashed px-6 py-14 text-center transition-all",
                 isDragActive && !isDragReject && "border-c-cyan bg-c-cyan/[0.08] shadow-neon-cyan",

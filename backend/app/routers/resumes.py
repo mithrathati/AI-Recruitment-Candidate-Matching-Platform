@@ -1,3 +1,5 @@
+import os
+import re
 from typing import List
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, Query
@@ -16,13 +18,17 @@ from app.services.document_processor import (
     validate_document,
 )
 from app.services.recruitment_service import extract_and_persist_candidate_profile
-from app.utils.file_utils import save_uploaded_file, validate_upload
+from app.utils.file_utils import validate_upload
 from app.utils.exceptions import (
     JobNotFoundError,
     CandidateNotFoundError,
     InvalidResumeError,
     DocumentProcessingError,
 )
+
+
+def _safe_filename(filename: str) -> str:
+    return re.sub(r"[^\w.\- ]", "_", os.path.basename(filename))
 
 router = APIRouter(prefix="", tags=["Resumes / Candidates"])
 
@@ -50,9 +56,9 @@ async def upload_resumes(
             if not content:
                 raise InvalidResumeError("Uploaded file is empty.")
             validate_upload(f.filename or "", len(content))
-            stored_path, safe_name = await save_uploaded_file(f.filename or "resume", content)
-            validate_document(stored_path, filename_hint=f.filename)
-            text = extract_document_text(stored_path, filename_hint=f.filename)
+            safe_name = _safe_filename(f.filename or "resume")
+            validate_document(content, filename_hint=f.filename)
+            text = extract_document_text(content, filename_hint=f.filename)
 
             cand = Candidate(
                 job_id=job.id,
