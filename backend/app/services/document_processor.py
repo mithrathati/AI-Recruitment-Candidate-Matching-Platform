@@ -1,5 +1,6 @@
 import os
-from typing import Optional
+from io import BytesIO
+from typing import Optional, Union
 from app.config import settings
 from app.utils.exceptions import (
     UnsupportedFileFormatError,
@@ -10,14 +11,23 @@ from app.utils.exceptions import (
 from app.utils.file_utils import clean_text, file_extension
 
 
-def _extract_pdf(path: str) -> str:
+def _extract_pdf(source: Union[str, BytesIO, bytes]) -> str:
     try:
         import pdfplumber
     except ImportError as e:
         raise DocumentProcessingError("PDF processing library (pdfplumber) not installed") from e
+
+    if isinstance(source, bytes):
+        stream = BytesIO(source)
+    elif isinstance(source, BytesIO):
+        stream = source
+        stream.seek(0)
+    else:
+        stream = source
+
     text_parts = []
     try:
-        with pdfplumber.open(path) as pdf:
+        with pdfplumber.open(stream) as pdf:
             for page in pdf.pages:
                 try:
                     t = page.extract_text() or ""
@@ -31,13 +41,22 @@ def _extract_pdf(path: str) -> str:
     return "\n\n".join(text_parts)
 
 
-def _extract_docx(path: str) -> str:
+def _extract_docx(source: Union[str, BytesIO, bytes]) -> str:
     try:
         from docx import Document
     except ImportError as e:
         raise DocumentProcessingError("DOCX processing library (python-docx) not installed") from e
+
+    if isinstance(source, bytes):
+        stream = BytesIO(source)
+    elif isinstance(source, BytesIO):
+        stream = source
+        stream.seek(0)
+    else:
+        stream = source
+
     try:
-        doc = Document(path)
+        doc = Document(stream)
     except Exception as e:
         raise CorruptedDocumentError(f"Failed to parse DOCX file: {str(e)}")
     parts = []
@@ -53,25 +72,50 @@ def _extract_docx(path: str) -> str:
     return "\n".join(parts)
 
 
-def _extract_txt(path: str) -> str:
-    try:
-        with open(path, "r", encoding="utf-8", errors="replace") as f:
-            return f.read()
-    except Exception as e:
-        raise CorruptedDocumentError(f"Failed to read TXT file: {str(e)}")
+def _extract_txt(source: Union[str, BytesIO, bytes]) -> str:
+    if isinstance(source, bytes):
+        try:
+            return source.decode("utf-8", errors="replace")
+        except Exception as e:
+            raise CorruptedDocumentError(f"Failed to decode TXT content: {str(e)}")
+    elif isinstance(source, BytesIO):
+        try:
+            source.seek(0)
+            return source.read().decode("utf-8", errors="replace")
+        except Exception as e:
+            raise CorruptedDocumentError(f"Failed to read TXT stream: {str(e)}")
+    else:
+        try:
+            with open(source, "r", encoding="utf-8", errors="replace") as f:
+                return f.read()
+        except Exception as e:
+            raise CorruptedDocumentError(f"Failed to read TXT file: {str(e)}")
 
 
-def extract_document_text(file_path: str, filename_hint: Optional[str] = None) -> str:
-    if not os.path.exists(file_path):
-        raise CorruptedDocumentError("Document file does not exist.")
-    ext = file_extension(filename_hint or file_path)
+def extract_document_text(
+    source: Union[str, bytes, BytesIO],
+    filename_hint: Optional[str] = None,
+) -> str:
+    if isinstance(source, (bytes, BytesIO)):
+        ext = file_extension(filename_hint or "")
+        if not ext:
+            raise UnsupportedFileFormatError(
+                "Cannot determine file type from content alone. "
+                "Please provide a filename hint or use a file with a known extension."
+            )
+    elif isinstance(source, str):
+        if not os.path.exists(source):
+            raise CorruptedDocumentError("Document file does not exist.")
+        ext = file_extension(filename_hint or source)
+    else:
+        raise UnsupportedFileFormatError(f"Unsupported source type: {type(source).__name__}")
     raw = ""
     if ext == "pdf":
-        raw = _extract_pdf(file_path)
+        raw = _extract_pdf(source)
     elif ext == "docx":
-        raw = _extract_docx(file_path)
+        raw = _extract_docx(source)
     elif ext == "txt":
-        raw = _extract_txt(file_path)
+        raw = _extract_txt(source)
     else:
         raise UnsupportedFileFormatError(f"Unsupported file extension: .{ext}")
     text = clean_text(raw)
@@ -88,8 +132,11 @@ def extract_document_text(file_path: str, filename_hint: Optional[str] = None) -
     return text
 
 
-def validate_document(file_path: str, filename_hint: Optional[str] = None) -> None:
-    text = extract_document_text(file_path, filename_hint=filename_hint)
+def validate_document(
+    source: Union[str, bytes, BytesIO],
+    filename_hint: Optional[str] = None,
+) -> None:
+    text = extract_document_text(source, filename_hint=filename_hint)
     if not text:
         raise EmptyDocumentError("Document has no readable text.")
     if len(text) > 1_000_000:

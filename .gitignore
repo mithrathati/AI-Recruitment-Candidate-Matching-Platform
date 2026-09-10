@@ -18,6 +18,13 @@ uploads/
 recruitment.db
 test_recruitment.db
 
+# Personal / sample resumes outside samples/ directory
+Thati_Mithra.pdf
+*.pdf
+!samples/*.pdf
+!backend/tests/*.pdf
+!frontend/public/*.pdf
+
 # Env & IDE
 .env
 .idea/
