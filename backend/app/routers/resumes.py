@@ -1,5 +1,6 @@
 import os
 import re
+from io import BytesIO
 from typing import List
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, Query
@@ -30,6 +31,12 @@ from app.utils.exceptions import (
 def _safe_filename(filename: str) -> str:
     return re.sub(r"[^\w.\- ]", "_", os.path.basename(filename))
 
+
+def _as_stream(content: bytes) -> BytesIO:
+    stream = BytesIO(content)
+    stream.seek(0)
+    return stream
+
 router = APIRouter(prefix="", tags=["Resumes / Candidates"])
 
 
@@ -57,8 +64,10 @@ async def upload_resumes(
                 raise InvalidResumeError("Uploaded file is empty.")
             validate_upload(f.filename or "", len(content))
             safe_name = _safe_filename(f.filename or "resume")
-            validate_document(content, filename_hint=f.filename)
-            text = extract_document_text(content, filename_hint=f.filename)
+            stream = _as_stream(content)
+            validate_document(stream, filename_hint=f.filename)
+            stream.seek(0)
+            text = extract_document_text(stream, filename_hint=f.filename)
 
             cand = Candidate(
                 job_id=job.id,
